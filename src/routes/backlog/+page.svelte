@@ -1,4 +1,5 @@
 <script>
+    // @ts-nocheck
     import { postData } from '../../api.js'; 
     import { onMount } from 'svelte';
 

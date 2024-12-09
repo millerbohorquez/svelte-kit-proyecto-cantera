@@ -1,6 +1,30 @@
-<script>
-  // No necesitas exportar `goToPage` si usas SvelteKit's routing.
+<script lang="ts">
+  import { slide } from 'svelte/transition';
+  
+  let isMenuOpen = false;
+
+  // Enlaces del menú centralizados
+  const menuItems = [
+    { href: '/', icon: '🏛️', label: 'Inicio' },
+    { href: '/solicitud', icon: '🏛️', label: 'Formulario' },
+    { href: '/wikii', icon: '🏛️', label: 'Wiki' },
+    { href: '/generalidades', icon: '🏛️', label: 'Generalidades' },
+    { href: '/backlog', icon: '🏛️', label: 'Backlog' }
+  ];
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+  }
+
+  // Cerrar menú con Escape
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Escape' && isMenuOpen) {
+      isMenuOpen = false;
+    }
+  }
 </script>
+
+<svelte:window on:keydown={handleKeydown}/>
 
 <style>
   header {
@@ -12,21 +36,53 @@
   
   .header-container {
     display: flex;
-    justify-content: space-between; 
+    justify-content: flex-start;
     align-items: center;
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 20px; 
   }
   
+  .header-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 50px;
+  }
+
+  .logo-circle {
+    background: white;
+    border-radius: 50%;
+    width: 41px;
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .header-logo img {
-    height: 40px; 
-    cursor: pointer; 
+    height: 30px;
+    width: auto;
+  }
+
+  .company-name {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
   }
   
   .header-links {
-    display: flex; 
-    gap: 20px; 
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 14%;
+    height: 100vh;
+    background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae);
+    flex-direction: column;
+    padding: 150px 20px 20px;
+    gap: 25px;
+    z-index: 998;
   }
   
   .header-link {
@@ -35,32 +91,153 @@
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
   }
-  
+
+  .header-link::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .header-link::after {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 35%;
+    height: 15px;
+    width: 2px;
+    background-color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .header-link:hover::before,
+  .header-link:hover::after {
+    opacity: 1;
+  }
+
   .header-link:hover {
     text-decoration: underline; 
     background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae); 
-    box-shadow: 0px 0px 5px #5C8BFF,
-                0px 0px 30px #5C8BFF,
-                0px 0px 90px #5C8BFF;
+    box-shadow: 0px 0px 0px #5C8BFF,
+                0px 0px 0px #5C8BFF,
+                0px 0px 0px #5C8BFF;
+  }
+
+  /* Estilos para el menú hamburguesa */
+  .menu-button {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 999;
+  }
+
+  .hamburger {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    transition: all 0.3s;
+  }
+
+  .hamburger::before {
+    transform: translateY(-8px);
+  }
+
+  .hamburger::after {
+    transform: translateY(8px);
+  }
+
+  /* Menú hamburguesa activo */
+  .menu-open .hamburger {
+    background-color: transparent;
+  }
+
+  .menu-open .hamburger::before {
+    transform: rotate(45deg);
+  }
+
+  .menu-open .hamburger::after {
+    transform: rotate(-45deg);
+  }
+
+  /* Mostrar menú cuando está activo */
+  .header-links.show {
+    display: flex;
+  }
+
+  .link-icon {
+    font-size: 18px;
+    min-width: 24px;
+    margin-left:30px;
   }
 </style>
 
 <header>
   <div class="header-container">
-    <!-- Logo que redirige al inicio -->
+    <button 
+      class="menu-button" 
+      class:menu-open={isMenuOpen} 
+      on:click={toggleMenu}
+      aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+      aria-expanded={isMenuOpen}
+      aria-controls="nav-menu"
+    >
+      <div class="hamburger"></div>
+    </button>
+
     <div class="header-logo">
-      <a href="/">
-        <img src="https://linktic.com/media/2024/03/logo-footer.svg" alt="LINKTIC Logo" />
+      <a href="/" class="logo-circle">
+        <img src="https://sdn.signalhire.co/storage/company/9211/1f1e/50cf/12ba/fb07/ca1b/2eff/0a5d.webp" alt="LINKTIC Logo" />
       </a>
+      <span class="company-name">LINKTIC</span>
     </div>
 
-    <!-- Links de navegación -->
-    <nav class="header-links">
-      <a href="/" class="header-link">Quiénes somos</a>
-      <a href="/solicitud" class="header-link">Formulario de Solicitud</a>
-      <a href="/generalidades" class="header-link">Stakeholders</a>
-      <a href="/backlog" class="header-link">BackLog de Alto Nivel</a>
+    <nav 
+      id="nav-menu"
+      class="header-links" 
+      class:show={isMenuOpen}
+      transition:slide={{ duration: 300 }}
+    >
+      {#each menuItems as {href, icon, label}}
+        <a 
+          {href} 
+          class="header-link"
+          aria-current={href === '/' ? 'page' : undefined}
+        >
+          <span class="link-icon">{icon}</span>
+          {label}
+        </a>
+      {/each}
     </nav>
   </div>
 </header>
+

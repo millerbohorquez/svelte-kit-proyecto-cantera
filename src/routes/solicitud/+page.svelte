@@ -1,4 +1,5 @@
 <script>
+    // @ts-nocheck
     import { createForm } from "svelte-forms-lib";
     import { postData } from '../../api.js'; 
     export let goToPage;
@@ -219,14 +220,33 @@
 
      h5{
      margin: 0;
-     
+     display: inline-block;
+    
     }
 
-    
+/* columna uno icono ala izquierda*/
+
+     .info-icon {
+     display: inline-block;
+     width: 20px;
+     height: 20px;
+     background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae); 
+     color: #fff;
+     font-size: 14px;
+     font-weight: bold;
+     line-height: 20px;
+     text-align: center;
+     border-radius: 50%;
+   
+     
+     
+   
+}
     .information-container {
     position: relative;
     display: inline-block;
     cursor: pointer; 
+    margin-left: 10px;
     }
 
     .information-text {
@@ -240,7 +260,7 @@
     position: absolute;
     z-index: 1;
     top: 50%;
-    right: 109%; 
+    right: 1500%;
     transform: translateY(-50%); 
     opacity: 0;
     transition: opacity 0.3s;
@@ -257,21 +277,37 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: 100%; 
-    transform: translateX(50%) scale(1.2);
+    right: -15px;
+    transform: translateY(-50%);
     border-width: 8px;
     border-style: solid;
-    border-color: transparent #4e7699 transparent transparent; 
-    border-radius: 50%; 
-  
+    border-color: transparent transparent transparent #4e7699;
 }
 
 
 
+/* columna dos icono ala derecha*/
+
+.info2-icon {
+     display: inline-block;
+     width: 20px;
+     height: 20px;
+     background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae); 
+     color: #fff;
+     font-size: 14px;
+     font-weight: bold;
+     line-height: 20px;
+     text-align: center;
+     border-radius: 50%;
+     
+     
+   
+}
     .information2-container {
     position: relative;
     display: inline-block;
     cursor: pointer; 
+    margin-left: 10px;
     }
 
     .information2-text {
@@ -280,22 +316,21 @@
     background: linear-gradient(135deg, #4e7699, #42505b, #2868a0, #086ac0); 
     color: #fff;
     text-align: center;
-    border-radius: 35px;
+    border-radius:35px;
     padding: 1rem;
     position: absolute;
     z-index: 1;
     top: 50%;
-    left: 109%; 
+    left: 250%;
     transform: translateY(-50%); 
     opacity: 0;
     transition: opacity 0.3s;
-   
-   
+    
 }
 
     .information2-container:hover .information2-text {
-    visibility: visible;
-    opacity: 1;
+     visibility: visible;
+     opacity: 1;
      
 }
 
@@ -303,13 +338,49 @@
     content: "";
     position: absolute;
     top: 50%;
-    right: 100%;  
-    transform: translateX(-50%) scale(1.2);
+    left: -5%;
+    transform: translateY(-50%);
     border-width: 8px;
     border-style: solid;
-    border-color: transparent #4e7699 transparent transparent; 
-    border-radius: 50%; 
-    
+    border-color: transparent #4e7699 transparent transparent;
+}
+
+
+.title-container, .title2-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px; 
+}
+
+
+h5 {
+    margin: 0;
+    flex: 1; 
+}
+
+
+.information-container, .information2-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+.info-icon, .info2-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae);
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    margin-left: auto; 
 }
 
 </style>
@@ -334,10 +405,16 @@
 
 
                 <div class="form-group">
-                    <div class="information-container">
-                    <h5>ORDEN DE TRABAJO/SERVICIO</h5>
-                    <span class="information-text">Es el documento que autoriza formalmente el inicio del proyecto o servicio solicitado. Define qué actividades deben llevarse a cabo y por quién.</span>
-                </div>
+                    <div class="title-container">
+                   <h5>ORDEN DE TRABAJO/SERVICIO</h5>
+                      <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
+                        <span class="information-text">
+                          Es el documento que autoriza formalmente el inicio del proyecto o servicio solicitado. Define qué actividades deben llevarse a cabo y por quién.
+                        </span>
+                      </div>
+                    </div>
+                    
                     <input type="text" id="orden_trabajo_servicio" placeholder="Orden de Trabajo/Servicio" bind:value={$form.orden_trabajo_servicio} on:change={handleChange} />
                     {#if $errors.orden_trabajo_servicio}
                       <small class="mensajeError">{$errors.orden_trabajo_servicio}</small>
@@ -346,10 +423,13 @@
 
 
                 <div class="form-group">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h5>ALCANCE DEL PROYECTO</h5>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Define los límites y objetivos del proyecto, especificando lo que se va a entregar y lo que está fuera del proyecto. Detalla las metas, recursos y plazos.</span>
                 </div>
+            </div>
                     <textarea id="alcancePalcance_proyectoroyecto" placeholder="Alcance del Proyecto" bind:value={$form.alcance_proyecto} on:change={handleChange}></textarea>
                     {#if $errors.alcance_proyecto}
                         <small class="mensajeError">{$errors.alcance_proyecto}</small>
@@ -357,10 +437,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h5>DOCUMENTO DE REQUISITOS</h5>
-                    <span class="information-text">Un documento donde se detallan las necesidades y especificaciones funcionales y técnicas que deben cumplirse en el proyecto. Es la base para diseñar la solución.</span>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
+                        <span class="information-text">Un documento donde se detallan las necesidades y especificaciones funcionales y técnicas que deben cumplirse en el proyecto. Es la base para diseñar la solución.</span>
                 </div>
+              </div>
                     <input type="text" id="documento_requisitos" placeholder="Documento de Requisitos" bind:value={$form.documento_requisitos} on:change={handleChange} />
                     {#if $errors.documento_requisitos}
                         <small class="mensajeError">{$errors.documento_requisitos}</small>
@@ -368,10 +451,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h5>ENTREGABLES</h5>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Los productos, servicios o resultados tangibles que se generarán durante el proyecto. Estos pueden incluir informes, software, manuales, etc.</span>
                 </div>
+            </div>
                     <input type="text" id="entregables" placeholder="Entregables" bind:value={$form.entregables} on:change={handleChange} />
                     {#if $errors.entregables}
                         <small class="mensajeError">{$errors.entregables}</small>
@@ -379,10 +465,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h5>ARQUITECTURA DE SOLUCION</h5>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">Describe la estructura técnica o conceptual de la solución, como componentes de software, módulos, bases de datos, servidores, y cómo interactúan entre ellos.</span>
                 </div>
+            </div>
                     <input type="text" id="arquitectura_solucion" placeholder="Arquitectura de Solución" bind:value={$form.arquitectura_solucion} on:change={handleChange} />
                     {#if $errors.arquitectura_solucion}
                         <small class="mensajeError">{$errors.arquitectura_solucion}</small>
@@ -390,10 +479,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h5>INFRAESTRUCTURA</h5>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Los recursos físicos o virtuales necesarios para soportar el desarrollo y la implementación de la solución, como hardware, redes, servidores y plataformas de nube.</span>
                 </div>
+            </div>
                     <input type="text" id="infraestructura" placeholder="Infraestructura" bind:value={$form.infraestructura} on:change={handleChange} />
                     {#if $errors.infraestructura}
                         <small class="mensajeError">{$errors.infraestructura}</small>
@@ -401,10 +493,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h5>ENTREGA DE SOPORTE</h5>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">El proceso mediante el cual la solución final es transferida al equipo de soporte, asegurando que puedan gestionar y mantener el producto o servicio después de la implementación.</span>
                 </div>
+            </div>
                     <input type="text" id="entrega_soporte" placeholder="Entrega de Soporte" bind:value={$form.entrega_soporte} on:change={handleChange} />
                     {#if $errors.entrega_soporte}
                         <small class="mensajeError">{$errors.entrega_soporte}</small>
@@ -412,10 +507,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h5>METODO/METODOLOGIA</h5>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">La estrategia o marco de trabajo utilizado para gestionar y ejecutar el proyecto, como metodologías ágiles (Scrum) o tradicionales (Cascada)</span>
                 </div>
+            </div>
                     <input type="text" id="metodo_metodologia" placeholder="Método/Metodología" bind:value={$form.metodo_metodologia} on:change={handleChange} />
                     {#if $errors.metodo_metodologia}
                         <small class="mensajeError">{$errors.metodo_metodologia}</small>
@@ -423,10 +521,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h5>FECHA DE SOLICITUD</h5>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">La fecha en la que se solicitó formalmente el proyecto o servicio.</span>
                 </div>
+            </div>
                     <input type="date" id="fecha_solicitud" placeholder="Fecha de Solicitud" bind:value={$form.fecha_solicitud} on:change={handleChange} />
                     {#if $errors.fecha_solicitud}
                         <small class="mensajeError">{$errors.fecha_solicitud}</small>
@@ -434,10 +535,13 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h5>FECHA DE ENTREGA</h5>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">La fecha en la que se espera que los entregables del proyecto estén completados y listos para ser entregados al cliente o usuario final.</span>
                 </div>
+            </div>
                     <input type="date" id="fecha_entrega" placeholder="Fecha de Entrega" bind:value={$form.fecha_entrega} on:change={handleChange} />
                     {#if $errors.fecha_entrega}
                         <small class="mensajeError">{$errors.fecha_entrega}</small>

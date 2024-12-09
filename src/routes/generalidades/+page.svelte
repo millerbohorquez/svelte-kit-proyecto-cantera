@@ -1,4 +1,5 @@
 <script>
+    // @ts-nocheck
     import { createForm } from "svelte-forms-lib";
     import { postData } from '../../api.js';
     import { getData } from '../../api.js';
@@ -330,6 +331,8 @@
     
     margin: 0;
     padding: 0;
+    display: inline-block;
+
   }
 
   .toggle-button {
@@ -362,10 +365,28 @@
 
  
   
+    /* columna uno icono ala izquierda*/
+
+    .info-icon {
+     display: inline-block;
+     width: 20px;
+     height: 20px;
+     background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae); 
+     color: #fff;
+     font-size: 14px;
+     font-weight: bold;
+     line-height: 20px;
+     text-align: center;
+     border-radius: 50%;
+    
+     
+   
+}
     .information-container {
     position: relative;
     display: inline-block;
     cursor: pointer; 
+    margin-left: 10px;
     }
 
     .information-text {
@@ -379,12 +400,11 @@
     position: absolute;
     z-index: 1;
     top: 100%;
-    right: 0%; 
+    right: -130px; 
     transform: translateY(-135%); 
     opacity: 0;
     transition: opacity 0.3s;
     
-   
 }
 
     .information-container:hover .information-text {
@@ -392,6 +412,7 @@
      opacity: 1;
      
 }
+
     .information-text::before {
      content: "";
      position: absolute;
@@ -402,15 +423,33 @@
      border-style: solid;
      border-color: #4e7699 transparent transparent transparent; 
      border-radius: 50%; 
-    
+  
 }
 
 
 
+/* columna dos icono ala derecha*/
+
+.info2-icon {
+     display: inline-block;
+     width: 20px;
+     height: 20px;
+     background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae); 
+     color: #fff;
+     font-size: 14px;
+     font-weight: bold;
+     line-height: 20px;
+     text-align: center;
+     border-radius: 50%;
+     
+     
+   
+}
     .information2-container {
     position: relative;
     display: inline-block;
     cursor: pointer; 
+    margin-left: 10px;
     }
 
     .information2-text {
@@ -423,23 +462,19 @@
     padding: 1rem;
     position: absolute;
     z-index: 1;
-    top: 50%;
-    left: 0%; 
+    top: 100%;
+    left: -660%; 
     transform: translateY(-135%); 
     opacity: 0;
     transition: opacity 0.3s;
-   
-   
+    
 }
 
     .information2-container:hover .information2-text {
      visibility: visible;
      opacity: 1;
-    
-    
      
 }
-
 
     .information2-text::before {
      content: "";
@@ -451,7 +486,21 @@
      border-style: solid;
      border-color: #4e7699 transparent transparent transparent; 
      border-radius: 50%; 
-     
+  
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.title2-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 </style>
 
@@ -477,10 +526,16 @@
             
                 <div class="container">
                 <div class="header">
-                    <div class="information-container">
-                    <h3><em>*</em> Requerimentos (RQ)</h3>
-                    <span class="information-text">Especificaciones y necesidades que el proyecto debe cumplir. Estos pueden incluir tanto requisitos funcionales como no funcionales. Son fundamentales para guiar el diseño y la implementación de la solución.</span>
-                </div>
+                    <div class="title-container">
+                        <h3><em>*</em> Requerimientos (RQ)</h3>
+                        <div class="information-container">
+                          <span class="info-icon">👁️‍🗨️</span>
+                          <span class="information-text">
+                            Especificaciones y necesidades que el proyecto debe cumplir. Estos pueden incluir tanto requisitos funcionales como no funcionales. Son fundamentales para guiar el diseño y la implementación de la solución.
+                          </span>
+                        </div>
+                      </div>
+           
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('rq')}>
                         <svg class={`arrow ${accordions.rq ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -523,10 +578,13 @@
 
              <div class="container">
                 <div class="header">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h3><em>*</em> Diseño UI/UX</h3>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Hace referencia al diseño de la interfaz de usuario (UI) y la experiencia de usuario (UX). Se enfoca en cómo los usuarios interactúan con la solución y busca optimizar tanto la funcionalidad como la estética.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Diseño')}>
                         <svg class={`arrow ${accordions.Diseño ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -571,10 +629,13 @@
                 
                 <div class="container">
                     <div class="header">
-                        <div class="information-container">
+                        <div class="title-container">
                         <h3><em>*</em> Arquitectura (ARQ)</h3>
+                        <div class="information-container">
+                            <span class="info-icon">👁️‍🗨️</span>
                         <span class="information-text">Define los principios, estándares y modelos que guían el diseño y desarrollo de los sistemas, asegurando coherencia y alineación con los objetivos estratégicos de la organización.</span>
                     </div>
+                </div>
                         <button class="accordion-button" type="button" on:click={() => toggleAccordion('Arqui')}>
                             <svg class={`arrow ${accordions.Arqui ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -617,10 +678,13 @@
 
                 <div class="container">
                     <div class="header">
-                        <div class="information2-container">
+                        <div class="title2-container">
                         <h3>Infraestrutura (INF)</h3>
+                        <div class="information2-container">
+                            <span class="info2-icon">👁️‍🗨️</span>
                         <span class="information2-text">gestión y mantenimiento de los recursos físicos y tecnológicos que soportan las operaciones de la organización, incluyendo servidores, redes, almacenamiento y seguridad.</span>
                     </div>
+                </div>
                         <button class="accordion-button" type="button" on:click={() => toggleAccordion('Infra')}>
                             <svg class={`arrow ${accordions.Infra ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -666,10 +730,13 @@
             
                 <div class="container">
                     <div class="header">
-                        <div class="information-container">
+                        <div class="title-container">
                         <h3> Ciberseguridad</h3>
+                        <div class="information-container">
+                            <span class="info-icon">👁️‍🗨️</span>
                         <span class="information-text">Protección de sistemas, redes y datos contra accesos no autorizados y amenazas cibernéticas.</span>
                     </div>
+                </div>
                         <button class="accordion-button" type="button" on:click={() => toggleAccordion('ciber')}>
                             <svg class={`arrow ${accordions.ciber ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -711,10 +778,13 @@
             
                 <div class="container">
                     <div class="header">
-                        <div class="information2-container">
+                        <div class="title2-container">
                         <h3>Desarrollo (DEV-NC/LC)</h3>
+                        <div class="information2-container">
+                            <span class="info2-icon">👁️‍🗨️</span>
                         <span class="information2-text">Creación de aplicaciones con plataformas de desarrollo visual, minimizando o eliminando la necesidad de codificación tradicional.</span>
                     </div>
+                </div>
                         <button class="accordion-button" type="button" on:click={() => toggleAccordion('DesarrolloNC')}>
                             <svg class={`arrow ${accordions.DesarrolloNC ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -760,10 +830,13 @@
 
                 <div class="container">
                     <div class="header">
-                        <div class="information-container">
+                        <div class="title-container">
                         <h3><em>*</em> Desarrollo (DEV)</h3>
+                        <div class="information-container">
+                            <span class="info-icon">👁️‍🗨️</span>
                         <span class="information-text">Proceso de diseño, creación y mantenimiento de software, aplicaciones y sistemas mediante programación.</span>
                     </div>
+                </div>
                         <button class="accordion-button" type="button" on:click={() => toggleAccordion('DesarrolloDEV')}>
                             <svg class={`arrow ${accordions.DesarrolloDEV ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -805,10 +878,13 @@
             
                 <div class="container">
                     <div class="header">
-                        <div class="information2-container">
+                        <div class="title2-container">
                         <h3>Datos (DBA)</h3>
+                        <div class="information2-container">
+                            <span class="info2-icon">👁️‍🗨️</span>
                         <span class="information2-text">Gestión y administración de bases de datos, asegurando su integridad, seguridad y disponibilidad para los usuarios y sistemas.</span>
                     </div>
+                </div>
                         <button class="accordion-button" type="button" on:click={() => toggleAccordion('Datos')}>
                             <svg class={`arrow ${accordions.Datos ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -858,10 +934,13 @@
             
             <div class="container">
                 <div class="header">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h3>Automatizaciones (AUT) </h3>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">Implementación de procesos automáticos para optimizar tareas repetitivas y mejorar la eficiencia operativa.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Automa')}>
                         <svg class={`arrow ${accordions.Automa ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -904,10 +983,13 @@
 
             <div class="container">
                 <div class="header">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h3>Aseguramiento de calidad (QA)</h3>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Proceso de validación y verificación para garantizar que el software cumpla con los estándares y requisitos establecidos.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Calidad')}>
                         <svg class={`arrow ${accordions.Calidad ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -954,10 +1036,13 @@
 
             <div class="container">
                 <div class="header">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h3><em>*</em> Metodologias Agiles/CMMI (M.A/C)</h3>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">Enfoques de gestión que promueven el desarrollo iterativo y la mejora continua, optimizando procesos y entregas de valor.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Metodologias')}>
                         <svg class={`arrow ${accordions.Metodologias ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -1000,10 +1085,13 @@
 
             <div class="container">
                 <div class="header">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h3>Copy</h3>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Proporcione un resumen breve de los mensajes clave para los interesados.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Copy')}>
                         <svg class={`arrow ${accordions.Copy ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -1050,10 +1138,13 @@
 
             <div class="container">
                 <div class="header">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h3>Diseño Grafico</h3>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">Creación visual de elementos que comunican ideas, fortalecen la marca y mejoran la experiencia del usuario</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Diseno')}>
                         <svg class={`arrow ${accordions.Diseno ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -1096,10 +1187,13 @@
 
             <div class="container">
                 <div class="header">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h3>Estrategia</h3>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">El enfoque general o plan de acción que se seguirá para alcanzar los objetivos del proyecto. Puede incluir aspectos técnicos, operativos o comerciales que guiarán la ejecución.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Estra')}>
                         <svg class={`arrow ${accordions.Estra ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -1146,10 +1240,13 @@
 
             <div class="container">
                 <div class="header">
-                    <div class="information-container">
+                    <div class="title-container">
                     <h3>Formación</h3>
+                    <div class="information-container">
+                        <span class="info-icon">👁️‍🗨️</span>
                     <span class="information-text">Se refiere a la capacitación o entrenamientos necesarios para el equipo o los usuarios finales del proyecto. Esto puede incluir aprender nuevas herramientas o procesos necesarios para la implementación o uso de la solución.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Forma')}>
                         <svg class={`arrow ${accordions.Forma ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -1193,10 +1290,13 @@
            
             <div class="container">
                 <div class="header">
-                    <div class="information2-container">
+                    <div class="title2-container">
                     <h3>Audiovisual</h3>
+                    <div class="information2-container">
+                        <span class="info2-icon">👁️‍🗨️</span>
                     <span class="information2-text">Producción de contenido que combina audio y video para comunicar ideas de manera efectiva.</span>
                 </div>
+            </div>
                     <button class="accordion-button" type="button" on:click={() => toggleAccordion('Audio')}>
                         <svg class={`arrow ${accordions.Audio ? 'rotate' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
