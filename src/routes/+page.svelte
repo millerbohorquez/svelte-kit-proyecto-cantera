@@ -49,7 +49,7 @@
     font-size: 18px;
     font-weight: bold;
     color: white;
-    background: linear-gradient(135deg, #207cca, #3c6484, #207cca, #5f8cae);
+    background: linear-gradient(135deg, #086ac0, #1263a5, #1d5688, #5f8cae); 
     border: none;
     border-radius: 0px;
     cursor: pointer;
@@ -58,7 +58,7 @@
   }
 
   .create-button:hover {
-    background: linear-gradient(135deg, #4e7699, #42505b, #2868a0, #086ac0);
+    background: linear-gradient(135deg, #4e7699, #42505b, #2868a0, #086ac0); 
     box-shadow: 0px 0px 15px rgba(92, 139, 255, 0.5);
     
   }
@@ -92,7 +92,7 @@
   </div>
 
   <button class="create-button" on:click={crearSolicitud}>
-    Crear Solicitud
+    Crear una solicitud
   </button>
 </div>
 

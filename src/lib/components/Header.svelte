@@ -9,7 +9,8 @@
     { href: '/solicitud', icon: '🏛️', label: 'Formulario' },
     { href: '/wikii', icon: '🏛️', label: 'Wiki' },
     { href: '/generalidades', icon: '🏛️', label: 'Generalidades' },
-    { href: '/backlog', icon: '🏛️', label: 'Backlog' }
+    { href: '/backlog', icon: '🏛️', label: 'Backlog' },
+    { href: '/login', icon: '', label: 'Login' }
   ];
 
   function toggleMenu() {
@@ -199,6 +200,7 @@
     min-width: 24px;
     margin-left:30px;
   }
+  
 </style>
 
 <header>
